@@ -25,7 +25,7 @@
 //
 // Layout is centered, responsive, and matches the portfolio's minimalist style.
 //
-// THUMBNAILS
+// thumbnails
 // Each project accepts an optional `thumb` field for the landing page:
 //   thumb: "images/my-project.jpg"   ← relative path to an image file
 //   thumb: "https://..."             ← or an absolute URL
@@ -125,7 +125,7 @@ const PROJECTS = [
     title: "Animal Shelter Simulator 2",
     period: "2024 — 2025",
     type: "PC / SteamDeck · Commercial",
-    thumb: "assets/Thumbnails/animal-shelter-2.jpg",
+    thumb: "assets/thumbnails/animal-shelter-2.jpg",
     shortDesc: "Commercial simulation game shipping on PC and SteamDeck. Architected the networked codebase, implemented all animal AI systems (navigation, locomotion, behavior, interactions), built sophisticated animation and procedural systems bringing animals to life, and maintained production code quality across 6+ months of active development.",
     tags: ["Unity", "C#", "AI Programming", "Gameplay Systems", "Animation Programming", "Multiplayer / Netcode", "Tools Programming", "Cross-platform"],
     link: { label: "steam", url: "https://store.steampowered.com/app/2658510/Animal_Shelter_2/" },
@@ -276,7 +276,7 @@ const PROJECTS = [
     title: "Break-A-Bot",
     period: "2024 — 2025",
     type: "PC / Steam · University Project",
-    thumb: "assets/Thumbnails/break-a-bot.png",
+    thumb: "assets/thumbnails/break-a-bot.png",
     shortDesc: "Top-down roguelike with procedurally generated levels. Built a modular, extensible level generation tool used by designers and artists with rule-based room stitching, implemented modular AI for distinct enemy types and boss encounters, and maintained gameplay systems across 300+ iterations.",
     tags: ["Unreal Engine 5", "C++", "Procedural Generation", "AI Programming"],
     link: { label: "steam", url: "https://store.steampowered.com/app/3365860/BreakaBot/" },
@@ -436,7 +436,7 @@ const PROJECTS = [
     tags: ["Unity", "C#", "AR / Mixed Reality", "AI", "Procedural Generation"],
     link: { label: "github", url: null },
     body: `
-      <iframe width="566" height="313" src="https://www.youtube.com/embed/CRAg9q6iLu8" title="Holoknights" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe width="566" height="626" src="https://www.youtube.com/embed/CRAg9q6iLu8" title="Holoknights" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       
       <h2>Introduction</h2>
       <p>Holo Knights is a tower defense game created as a solo project during my free time at my Apptimia internship. Having access to Microsoft HoloLens AR glasses sparked the idea to develop this experience. Holo Knights combines traditional tower defense mechanics with AR integration, featuring:</p>
@@ -484,7 +484,7 @@ const PROJECTS = [
     title: "Visual Debugging Console for Unity",
     period: "2022",
     type: "Open Source Tool · Passion Project",
-    thumb: "assets/Thumbnails/VisualDebugConsole.jpg",
+    thumb: "assets/thumbnails/VisualDebugConsole.jpg",
     shortDesc: "Custom QA debugging tool replacing text-based console with user-friendly interface. Features runtime variable monitoring, remote function calling, and 3D worldspace labels. Used by multiple commercial game teams.",
     tags: ["Unity", "C#", "Tools Programming"],
     link: { label: "github", url: "https://gitlab.com/darthkornik/visual-debug-console" }
@@ -493,7 +493,7 @@ const PROJECTS = [
     title: "FLUCZAK Event Utility Libraries",
     period: "2024",
     type: "Open Source Library · C++",
-    thumb: "assets/Thumbnails/delegates.png",
+    thumb: "assets/thumbnails/delegates.png",
     shortDesc: "Reusable C++ utility library implementing multicast delegates, event systems, and signal buses. Designed for custom game engines and used across multiple personal and team projects.",
     tags: ["C++", "Architecture Patterns", "Libraries/Frameworks"],
     link: { label: "github", url: "https://github.com/FLuczak/FluczakSignalBus" }
@@ -502,7 +502,7 @@ const PROJECTS = [
     title: "Mobile Games — Frocco Games",
     period: "2022",
     type: "Mobile · Passion Projects",
-    thumb: "assets/Thumbnails/frocco-games.jpg",
+    thumb: "assets/thumbnails/frocco-games.jpg",
     shortDesc: "Collection of mobile games created in free time. Designed gameplay architecture, implemented core mechanics, and integrated Google APIs including AdMob, Google Play Games, and Firebase for monetization and analytics.",
     tags: ["Unity", "C#", "Mobile", "Game Design", "Architecture"],
     link: { label: "google-play", url: "https://play.google.com/store/apps/dev?id=7936025786907934516&hl=en_AU" }
