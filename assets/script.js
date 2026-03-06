@@ -69,7 +69,7 @@ const SOCIALS = [
 const PROJECTS = [
   {
     id: "vertigo-games-internship",
-    title: "Project Unbound (Unannounced)",
+    title: "Unannounced VR Project",
     period: "September 2025 — February 2026",
     type: "VR Title · Vertigo Games · Commercial (Unannounced)",
     thumb: null,
