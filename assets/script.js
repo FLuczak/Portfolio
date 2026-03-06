@@ -431,7 +431,7 @@ const PROJECTS = [
     title: "Holo Knights TD",
     period: "2021",
     type: "Personal Project · AR Game",
-    thumb: "assets/thumbnails/Holoknights.png",
+    thumb: "assets/thumbnails/HoloKnights.png",
     shortDesc: "AR tower defense game for Microsoft HoloLens created during internship. Built procedurally generated maps, enemy and tower AI systems, UI, and AR controls in a passion project.",
     tags: ["Unity", "C#", "AR / Mixed Reality", "AI", "Procedural Generation"],
     link: { label: "github", url: null },
