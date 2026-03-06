@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Franciszek Łuczak — Game Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+  <nav>
+    <button class="nav-name" onclick="showHome()">franciszek łuczak</button>
+    <ul class="nav-links">
+      <li><a onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">projects</a></li>
+      <li><a onclick="showCV()">cv</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════ HOME ══════════ -->
+  <div id="view-home" class="view active">
+
+    <section class="about-section" id="about">
+      <div class="about-left">
+        <p class="about-label">game developer</p>
+        <h1 class="about-name">Franciszek<br />Łuczak</h1>
+        <p class="about-title">
+          Unreal Engine · Unity · C++ · C#<br />
+            Nijmegen, Netherlands
+        </p>
+        <p class="about-bio">
+          I'm a gameplay and AI programmer with a passion for building immersive game experiences and high quality software.
+          Five years shipping titles across PC, VR/AR, console, and mobile. Currently open to new roles.
+        </p>
+      </div>
+
+      <div class="about-right">
+        <div class="about-block">
+          <p class="block-label">Skills</p>
+          <div class="skills-grid" id="skills-grid"></div>
+        </div>
+        <div class="about-block">
+          <p class="block-label">Find me</p>
+          <div class="socials-list" id="socials-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects-section" id="projects">
+      <div class="section-head">
+        <span class="section-head-label">Projects</span>
+        <div class="section-head-line"></div>
+      </div>
+      <div class="projects-list" id="projects-list"></div>
+    </section>
+
+    <footer>
+      <p>Franciszek Łuczak</p>
+      <p>© 2025</p>
+    </footer>
+  </div>
+
+  <!-- ══════════ PROJECT PAGE ══════════ -->
+  <div id="view-project" class="view">
+    <div id="project-page-content"></div>
+  </div>
+
+  <!-- ══════════ CV PAGE ══════════ -->
+  <div id="view-cv" class="view">
+    <div id="cv-page-content"></div>
+  </div>
+
+
+  <script src="assets/script.js"></script>
+</body>
+</html>
