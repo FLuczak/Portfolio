@@ -16,6 +16,7 @@
       color: var(--white);
       font-family: var(--sans);
       font-weight: 300;
+      overflow-x: hidden;
     }
 
     /* ── VIEWS ── */
@@ -47,6 +48,17 @@
       padding: 0;
     }
 
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      margin-right: -0.5rem;
+    }
+
     .nav-links {
       display: flex;
       gap: 2.5rem;
@@ -65,6 +77,49 @@
     }
 
     .nav-links a:hover { color: var(--white); }
+
+    /* ── Mobile Nav ── */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1.25rem 1rem;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .nav-links.active {
+        max-height: 500px;
+      }
+
+      .nav-links li {
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 1rem 1.5rem;
+        font-size: 0.75rem;
+      }
+
+      .nav-name {
+        font-size: 0.65rem;
+      }
+    }
 
     /* ── ABOUT SECTION ── */
     .about-section {
@@ -135,6 +190,43 @@
       text-transform: uppercase;
       color: var(--dim);
       margin-bottom: 1.5rem;
+    }
+
+    /* ── Mobile About ── */
+    @media (max-width: 768px) {
+      .about-section {
+        padding: 7rem 1rem 0;
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .about-left {
+        padding: 2rem 0 2rem 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .about-right {
+        grid-template-rows: auto auto;
+      }
+
+      .about-block {
+        padding: 2rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .about-bio {
+        max-width: 100%;
+      }
+
+      .about-name {
+        font-size: clamp(1.5rem, 5vw, 2.5rem);
+        margin-bottom: 1rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ── SKILLS ── */
@@ -218,6 +310,17 @@
       flex: 1;
       height: 1px;
       background: var(--border);
+    }
+
+    /* ── Mobile Projects ── */
+    @media (max-width: 768px) {
+      .projects-section {
+        padding: 3rem 1rem;
+      }
+
+      .section-head {
+        margin-bottom: 2rem;
+      }
     }
 
     /* PROJECT LIST */
@@ -325,6 +428,8 @@
       display: block;
       transition: color 0.15s;
       grid-column: 1 / -1;
+      position: relative;
+      z-index: 101;
     }
 
     .page-back:hover { color: var(--white); }
@@ -414,6 +519,22 @@
     }
 
     .page-body strong { color: var(--white); font-weight: 400; }
+
+    /* ── Mobile Project Page ── */
+    @media (max-width: 768px) {
+      .project-page {
+        padding: 7rem 1rem 3rem;
+      }
+
+      .page-title {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+
+      .page-meta {
+        gap: 1rem;
+        padding: 1.5rem 0;
+      }
+    }
 
     /* ── MEDIA CONTAINERS ── */
     .media-container {
@@ -521,6 +642,25 @@
       line-height: 1.6;
     }
 
+    /* ── Mobile Media ── */
+    @media (max-width: 768px) {
+      .media-container {
+        margin: 2rem 0;
+        width: 100%;
+      }
+
+      .page-body img,
+      .page-body video {
+        margin: 1.5rem 0;
+        width: 100%;
+      }
+
+      .page-body table {
+        margin: 1.5rem 0;
+        width: 100%;
+      }
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
@@ -536,6 +676,19 @@
       font-family: var(--mono);
       font-size: 0.65rem;
       color: var(--dim);
+    }
+
+    /* ── Mobile Footer ── */
+    @media (max-width: 768px) {
+      footer {
+        padding: 1.5rem 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      footer p {
+        font-size: 0.6rem;
+      }
     }
 
     /* ── REVEAL ── */
@@ -598,6 +751,28 @@
       font-size: 0.85rem;
       font-weight: 400;
       letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Mobile CV ── */
+    @media (max-width: 768px) {
+      .cv-page {
+        padding: 6rem 1rem 2rem;
+      }
+
+      .cv-title {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+
+      .cv-contact {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+    }
       text-transform: uppercase;
       margin-bottom: 1.5rem;
       padding-bottom: 0.75rem;
@@ -829,19 +1004,18 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      nav { padding: 1.25rem 1.5rem; }
-      .nav-links { display: none; }
-      .about-section { grid-template-columns: 1fr; padding: 7rem 1.5rem 0; }
+      nav { padding: 1.25rem 1rem; }
+      .about-section { grid-template-columns: 1fr; padding: 7rem 1rem 0; }
       .about-left { padding: 2.5rem 0; border-right: none; border-bottom: 1px solid var(--border); }
       .about-right { grid-template-rows: auto auto; }
       .about-block { padding: 2rem 0; }
-      .projects-section { padding: 3rem 1.5rem; }
-      .project-page { padding: 5rem 1.5rem 3rem; max-width: calc(100% - 3rem); }
+      .projects-section { padding: 3rem 1rem; }
+      .project-page { padding: 5rem 1rem 3rem; max-width: calc(100% - 2rem); }
       .page-back { margin-bottom: 2rem; }
-      .media-container { margin: 2rem auto; }
-      .page-body img, .page-body video { margin: 1.5rem auto; }
-      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
-      .cv-page { padding: 5rem 1.5rem 2rem; }
+      .media-container { margin: 2rem 0; }
+      .page-body img, .page-body video { margin: 1.5rem 0; }
+      footer { padding: 1rem; flex-direction: column; gap: 0.5rem; }
+      .cv-page { padding: 5rem 1rem 2rem; }
       .cv-title { font-size: 1.5rem; }
       .cv-contact { flex-direction: column; gap: 0.5rem; }
       .cv-skills-grid { grid-template-columns: 1fr; }

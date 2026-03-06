@@ -126,7 +126,7 @@ const PROJECTS = [
     period: "2024 — 2025",
     type: "PC / SteamDeck · Commercial",
     thumb: "assets/thumbnails/animal-shelter-2.jpg",
-    shortDesc: "Commercial simulation game shipping on PC and SteamDeck. Architected the networked codebase, implemented all animal AI systems (navigation, locomotion, behavior, interactions), built sophisticated animation and procedural systems bringing animals to life, and maintained production code quality across 6+ months of active development.",
+    shortDesc: "Commercial simulation game shipping on PC and SteamDeck. Architected the networked codebase, implemented all animal AI systems (navigation, locomotion, behavior, interactions), built animation systems including procedural animations bringing animals to life, and maintained production code quality across 12+ months of development",
     tags: ["Unity", "C#", "AI Programming", "Gameplay Systems", "Animation Programming", "Multiplayer / Netcode", "Tools Programming", "Cross-platform"],
     link: { label: "steam", url: "https://store.steampowered.com/app/2658510/Animal_Shelter_2/" },
     body: `
@@ -286,7 +286,7 @@ const PROJECTS = [
       </video>
       
       <h2>Overview</h2>
-      <p>Break-A-Bot is a commercial roguelike developed in Unreal Engine. As AI and gameplay programmer, I focused on creating systems that empowered designers and artists—particularly a sophisticated level generation tool and modular AI framework supporting diverse enemy encounters.</p>
+      <p>Break-A-Bot is a commercial roguelike developed in Unreal Engine. As AI and gameplay programmer, I focused on creating systems that empowered designers and artists—particularly a complex level generation tool and modular AI framework supporting diverse enemy encounters.</p>
       
       <h2>Procedural Level Generation Architecture</h2>
       <p>I developed an architect-driven procedural level generation tool inspired by Returnal and Path of Exile 2. The system features a modular, pass-based design that enabled extensibility and maintainability:</p>
@@ -295,7 +295,7 @@ const PROJECTS = [
         <li><strong>Rule-Based Extensibility</strong> — Blueprint-scripted rule objects that define constraints for spawning rooms, props, and wall tiles, allowing designers to add new rules without coding</li>
         <li><strong>Room Template System</strong> — Reusable room components including Exit, Entrance, Bounds, Floor, and Prop Spawner components for fine-grained spatial control</li>
         <li><strong>Multi-floor Support</strong> — Full support for verticality and varied heights, enabling 3D level complexity</li>
-        <li><strong>Collision & Overlap Management</strong> — Sophisticated bounding box systems preventing invalid placements while maintaining design flexibility</li>
+        <li><strong>Collision & Overlap Management</strong> —  Bounding box controlling systems preventing invalid placements while maintaining design flexibility</li>
       </ul>
       
       <div class="repo-card">
@@ -376,7 +376,7 @@ const PROJECTS = [
       <img src="assets/Images/Smash-balls-end-screen.png"/>
       
       <h2>Input Management & State Control</h2>
-      <p>I developed sophisticated input handling systems that managed player state transitions, preventing edge cases like getting stuck in animation states, and ensuring responsive controls throughout gameplay.</p>
+      <p>I developed input handling systems that managed player state transitions, preventing edge cases like getting stuck in animation states, and ensuring responsive controls throughout gameplay.</p>
       
       <h2>Performance Optimization</h2>
       <p>To ensure smooth gameplay across multiple devices, I regularly profiled and optimized both rendering and game logic. I contributed to profiling documentation and optimization guidelines, achieving consistently smooth performance even on lower-end hardware—critical for a couch game experience.</p>
@@ -530,6 +530,7 @@ const PROJECTS = [
     .row-thumb {
       width: 240px;
       height: 240px;
+      aspect-ratio: 1 / 1;
       flex-shrink: 0;
       overflow: hidden;
       border: 1px solid var(--border);
@@ -540,9 +541,11 @@ const PROJECTS = [
     .row-thumb img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center;
       display: block;
       transition: transform 0.4s ease;
+      background-color: #111;
     }
 
     .project-row:hover .row-thumb img {
@@ -688,7 +691,8 @@ const PROJECTS = [
 
       .row-thumb {
         width: 100% !important;
-        height: 180px !important;
+        height: auto !important;
+        aspect-ratio: 1 / 1 !important;
         border-left: none !important;
         border-right: none !important;
         border-top: none !important;
@@ -814,12 +818,28 @@ function renderProjects() {
 // ─────────────────────────────────────────────────────────────────────────────
 // ROUTING
 // ─────────────────────────────────────────────────────────────────────────────
-function showHome() {
+function toggleNavMenu() {
+  const navMenu = document.getElementById('nav-menu');
+  navMenu.classList.toggle('active');
+}
+
+function showHome(skipPushState = false) {
   document.getElementById('view-home').classList.add('active');
   document.getElementById('view-project').classList.remove('active');
   document.getElementById('view-cv').classList.remove('active');
   window.scrollTo({ top: 0 });
+  if (!skipPushState) {
+    window.history.pushState({ page: 'home' }, 'Home', window.location.pathname);
+  }
   setTimeout(observeReveal, 50);
+}
+
+function showHomeAndScrollToProjects() {
+  showHome();
+  setTimeout(() => {
+    document.getElementById('projects').scrollIntoView({behavior:'smooth'});
+    toggleNavMenu();
+  }, 100);
 }
 
 function showProject(id) {
@@ -837,6 +857,11 @@ function showProject(id) {
       <div class="media-label">${description}</div>
     </div>`;
   });
+
+  // Remove width and height attributes from videos and iframes to make them responsive
+  bodyWithMedia = bodyWithMedia.replace(/(<(?:video|iframe)[^>]*)\s+width=["']?\d+["']?\s+height=["']?\d+["']?([^>]*>)/g, '$1$2');
+  bodyWithMedia = bodyWithMedia.replace(/(<(?:video|iframe)[^>]*)\s+width=["']?\d+["']?([^>]*>)/g, '$1$2');
+  bodyWithMedia = bodyWithMedia.replace(/(<(?:video|iframe)[^>]*)\s+height=["']?\d+["']?([^>]*>)/g, '$1$2');
   
   document.getElementById('project-page-content').innerHTML = `
     <div class="project-page">
@@ -865,6 +890,7 @@ function showProject(id) {
     </div>`;
   document.getElementById('view-home').classList.remove('active');
   document.getElementById('view-project').classList.add('active');
+  window.history.pushState({ page: 'project', id: id }, p.title, `#project/${id}`);
   window.scrollTo({ top: 0 });
 }
 
@@ -912,7 +938,7 @@ function showCV() {
             <ul class="cv-responsibilities">
               <li>Architected the core game codebase during pre-production, establishing system dependencies, API contracts, and design patterns to support rapid team scaling</li>
               <li>Implemented comprehensive AI systems for animal characters including navigation with custom pathfinding wrappers, natural locomotion, behavior trees, and complex interactions</li>
-              <li>Developed sophisticated animation systems leveraging behavior-driven parameters, animation layering, blending, and procedural IK for responsive character animation</li>
+              <li>Developed animation systems leveraging behavior-driven parameters, animation layering, blending, and procedural IK for responsive character animation</li>
               <li>Created specialized tools and mini-editors for the level design, QA, and systems design teams to accelerate iteration workflows</li>
               <li>Engineered multiplayer synchronization systems with client/server authority management, state replication, and conflict resolution for interconnected game systems</li>
               <li>Profiled and optimized performance across PC and SteamDeck platforms, ensuring consistent responsiveness across different hardware specifications</li>
@@ -1031,6 +1057,7 @@ function showCV() {
   document.getElementById('view-home').classList.remove('active');
   document.getElementById('view-project').classList.remove('active');
   document.getElementById('view-cv').classList.add('active');
+  window.history.pushState({ page: 'cv' }, 'CV', '#cv');
   window.scrollTo({ top: 0 });
 }
 function observeReveal() {
@@ -1044,9 +1071,28 @@ function observeReveal() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// BROWSER HISTORY HANDLER
+// ─────────────────────────────────────────────────────────────────────────────
+window.addEventListener('popstate', (event) => {
+  if (event.state) {
+    if (event.state.page === 'home') {
+      showHome(true);
+    } else if (event.state.page === 'project' && event.state.id) {
+      showProject(event.state.id);
+    } else if (event.state.page === 'cv') {
+      showCV();
+    }
+  } else {
+    // If no state, go back to home
+    showHome(true);
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────────────────────────────────────
 renderSkills();
 renderSocials();
 renderProjects();
 setTimeout(observeReveal, 100);
+window.history.replaceState({ page: 'home' }, 'Home', window.location.pathname);

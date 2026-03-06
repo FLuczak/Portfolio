@@ -12,9 +12,10 @@
 
   <nav>
     <button class="nav-name" onclick="showHome()">franciszek łuczak</button>
-    <ul class="nav-links">
-      <li><a onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">projects</a></li>
-      <li><a onclick="showCV()">cv</a></li>
+    <button class="nav-toggle" id="nav-toggle" onclick="toggleNavMenu()">☰</button>
+    <ul class="nav-links" id="nav-menu">
+      <li><a onclick="showHomeAndScrollToProjects()">projects</a></li>
+      <li><a onclick="showCV(); toggleNavMenu()">cv</a></li>
     </ul>
   </nav>
 
