@@ -436,9 +436,7 @@ const PROJECTS = [
     tags: ["Unity", "C#", "AR / Mixed Reality", "AI", "Procedural Generation"],
     link: { label: "github", url: null },
     body: `
-      <video controls width="566" height="313">
-        <source src="assets/Videos/HoloKnights.mp4" type="video/mp4">
-      </video>
+      <iframe width="566" height="313" src="https://www.youtube.com/embed/CRAg9q6iLu8" title="Holoknights" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       
       <h2>Introduction</h2>
       <p>Holo Knights is a tower defense game created as a solo project during my free time at my Apptimia internship. Having access to Microsoft HoloLens AR glasses sparked the idea to develop this experience. Holo Knights combines traditional tower defense mechanics with AR integration, featuring:</p>
