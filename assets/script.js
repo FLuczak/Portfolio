@@ -72,7 +72,7 @@ const PROJECTS = [
     title: "Unannounced VR Project",
     period: "September 2025 — February 2026",
     type: "VR Title · Vertigo Games · Commercial (Unannounced)",
-    thumb: null,
+    thumb: 'assets/thumbnails/vertigo-logo.jpg',
     shortDesc: "Internship at an established VR development studio working on advanced gameplay and AI systems. Architected and refactored core state management systems, designed hierarchical task network extensions, implemented character control mechanisms with procedural animation, and optimized performance-critical gameplay code for VR constraints.",
     tags: ["Unreal Engine 5", "C++", "AI Programming", "VR Development", "Animation Systems", "Architecture Design", "Performance Optimization"],
     body: `
@@ -277,7 +277,7 @@ const PROJECTS = [
     period: "2024 — 2025",
     type: "PC / Steam · University Project",
     thumb: "assets/thumbnails/break-a-bot.png",
-    shortDesc: "Top-down roguelike with procedurally generated levels. Built a modular, extensible level generation tool used by designers and artists with rule-based room stitching, implemented modular AI for distinct enemy types and boss encounters, and maintained gameplay systems across 300+ iterations.",
+    shortDesc: "Top-down roguelike with procedurally generated levels. Built a modular, extensible level generation tool used by designers and artists with rule-based room stitching, implemented modular AI for distinct enemy types and boss encounters, and maintained gameplay systems across multiple iterations.",
     tags: ["Unreal Engine 5", "C++", "Procedural Generation", "AI Programming"],
     link: { label: "steam", url: "https://store.steampowered.com/app/3365860/BreakaBot/" },
     body: `
@@ -329,7 +329,7 @@ const PROJECTS = [
       </video>      
       
       <h2>Gameplay Development & Maintenance</h2>
-      <p>Over 6 months of development, I implemented new player mechanics (mines and hammer), maintained gameplay systems through active iteration (300+ documented changes), debugged interconnected systems, and handled localization and UI interactions. This sustained development cycle tested system robustness and flexibility across a full commercial project lifecycle.</p>
+      <p>Over 6 months of development, I implemented new player mechanics (mines and hammer), maintained gameplay systems through active iteration, debugged interconnected systems, and handled localization and UI interactions.</p>
     `
   },
   {
