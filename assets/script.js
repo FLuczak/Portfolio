@@ -49,8 +49,8 @@ const SKILLS = [
   { name: "Unity", group: "Engine", experience: "5 years", years: 5, description: "3 years commercial · 2 years personal/university. Primary engine across commercial simulation titles, mobile games, and an AR project." },
   { name: "Custom Engines", group: "Engine", experience: "1 year", years: 0.5, description: "University only. Built and maintained a custom C++ engine for a university game project." },
   { name: "C++", group: "Language", experience: "3 years", years: 3, description: "0.5 year commercial · 2.5 years university. Used throughout custom engine and Unreal Engine projects." },
-  { name: "C#", group: "Language", experience: "5 years", years: 5, description: "3 years commercial · 2 years personal/university. Primary language for all Unity work — commercial titles, tools, and mobile games." },
-  { name: "TypeScript", group: "Language", experience: "2 years", years: 2, description: "Personal projects only. Used for web tooling and this portfolio." },
+  { name: "C#", group: "Language", experience: "5 years", years: 5, description: "3 years commercial · 2 years personal work. Primary language for all Unity work — commercial titles, tools, and mobile games." },
+  { name: "TypeScript", group: "Language", experience: "1 year", years: 1, description: "Used for commercial mobile game project for 0.5 a year and for personal web development projects for 0.5 a year" },
   { name: "Blueprints", group: "Workflow", experience: "3 years", years: 3, description: "0.5 year commercial · 2.5 years university. Used alongside C++ for prototyping and designer-facing scripting in Unreal projects." },
   { name: "Behavior Trees", group: "AI", experience: "4 years", years: 4, description: "1 year commercial · 3 years university. Implemented custom BT editors, tasks, and decorators across commercial and university work." },
   { name: "HTNs", group: "AI", experience: "1 year", years: 1, description: "Commercial only. Extended an existing HTN system with custom tasks and decorators during a professional internship." },
@@ -60,7 +60,7 @@ const SKILLS = [
   { name: "Tools Programming", group: "Gameplay", experience: "4 years", years: 4, description: "2 years commercial · 2 years university. Custom editor tooling, CI/CD pipelines, and a visual debugging console used by multiple commercial teams." },
   { name: "Multiplayer / Netcode", group: "Gameplay", experience: "1.5 years", years: 1.5, description: "Commercial only. Client/server architecture for a commercial simulation title, covering authority, replication, and AI state sync." },
   { name: "Git", group: "Workflow", experience: "6 years", years: 6, description: "3 years commercial · 3 years personal/university. Used throughout all work, including CI/CD pipelines with automated deployment and formatting." },
-    { name: "Perforce", group: "Workflow", experience: "4 years", years: 4, description: "3 years university 1 year commercial use" },
+    { name: "Perforce", group: "Workflow", experience: "4 years", years: 4, description: "3 years university · 1 year commercial use" },
 ];
 
 const SOCIALS = [
