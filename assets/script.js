@@ -45,16 +45,22 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SKILLS = [
-  "Unreal Engine 5",        "Unity", 
-   "Custom Engines",'C#',
-  "C++",           "Blueprints",
-  "Behavior Trees", "HTNs",
-  "Gameplay Systems programming",
-   "Tools programming",
-  "Animation programming",
-          "Multiplayer / netcode",
-  "Navigation and locomotion", 
-  "Typescript", "Perforce","Git",
+  { name: "Unreal Engine 5", group: "Engine", experience: "2.5 years", years: 2.5, description: "0.5 year commercial · 2 years university. Used in university game projects and professionally on an unannounced VR title." },
+  { name: "Unity", group: "Engine", experience: "5 years", years: 5, description: "3 years commercial · 2 years personal/university. Primary engine across commercial simulation titles, mobile games, and an AR project." },
+  { name: "Custom Engines", group: "Engine", experience: "1 year", years: 0.5, description: "University only. Built and maintained a custom C++ engine for a university game project." },
+  { name: "C++", group: "Language", experience: "3 years", years: 3, description: "0.5 year commercial · 2.5 years university. Used throughout custom engine and Unreal Engine projects." },
+  { name: "C#", group: "Language", experience: "5 years", years: 5, description: "3 years commercial · 2 years personal/university. Primary language for all Unity work — commercial titles, tools, and mobile games." },
+  { name: "TypeScript", group: "Language", experience: "2 years", years: 2, description: "Personal projects only. Used for web tooling and this portfolio." },
+  { name: "Blueprints", group: "Workflow", experience: "3 years", years: 3, description: "0.5 year commercial · 2.5 years university. Used alongside C++ for prototyping and designer-facing scripting in Unreal projects." },
+  { name: "Behavior Trees", group: "AI", experience: "4 years", years: 4, description: "1 year commercial · 3 years university. Implemented custom BT editors, tasks, and decorators across commercial and university work." },
+  { name: "HTNs", group: "AI", experience: "1 year", years: 1, description: "Commercial only. Extended an existing HTN system with custom tasks and decorators during a professional internship." },
+  { name: "Navigation and Locomotion", group: "AI", experience: "4 years", years: 4, description: "2 years commercial · 2 years university. Built nav systems ranging from grid A* to Recast wrappers with physics-based flocking and parallelised pathfinding." },
+  { name: "Gameplay Systems", group: "Gameplay", experience: "6 years", years: 6, description: "3 years commercial · 3 years university. Core focus across nearly all projects — economy, AI interactions, and player mechanics." },
+  { name: "Animation Programming", group: "Gameplay", experience: "2 years", years: 2, description: "1 year commercial · 1 year university. Unity Animator with IK and layering commercially; control rigs and procedural animation professionally." },
+  { name: "Tools Programming", group: "Gameplay", experience: "4 years", years: 4, description: "2 years commercial · 2 years university. Custom editor tooling, CI/CD pipelines, and a visual debugging console used by multiple commercial teams." },
+  { name: "Multiplayer / Netcode", group: "Gameplay", experience: "1.5 years", years: 1.5, description: "Commercial only. Client/server architecture for a commercial simulation title, covering authority, replication, and AI state sync." },
+  { name: "Git", group: "Workflow", experience: "6 years", years: 6, description: "3 years commercial · 3 years personal/university. Used throughout all work, including CI/CD pipelines with automated deployment and formatting." },
+    { name: "Perforce", group: "Workflow", experience: "4 years", years: 4, description: "3 years university 1 year commercial use" },
 ];
 
 const SOCIALS = [
@@ -272,6 +278,50 @@ const PROJECTS = [
     `
   },
   {
+    id: "animal-shelter-simulator",
+    title: "Animal Shelter Simulator",
+    period: "2022 — 2023",
+    type: "Multi-platform · Commercial",
+    thumb: "assets/thumbnails/AnimalShelter1.jpg",
+    shortDesc: "Commercial simulation game released on PC, Xbox One, PlayStation, Nintendo Switch, and SteamDeck. Rebuilt the AI system with a visual tool for designers, implemented gameplay mechanics, and developed technical documentation.",
+    tags: ["Unity", "C#", "AI Systems", "Multi-platform", "Documentation"],
+    link: { label: "steam", url: "https://store.steampowered.com/app/1239320/Animal_Shelter/" },
+    body: `
+      <iframe width="566" height="313" src="https://www.youtube.com/embed/SloUgzPK1v0" title="Animal Shelter - Official Release Trailer | STEAM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      
+      <h2>Overview</h2>
+      <p>Animal Shelter Simulator is a commercial simulation game released across PC and multiple consoles (Xbox One, PlayStation, Nintendo Switch, SteamDeck). I joined as AI and gameplay programmer, quickly becoming the designated AI specialist while contributing broadly to gameplay systems and team infrastructure.</p>
+      
+      <h2>AI System Refactor</h2>
+      <p>Upon joining, I refactored the core AI system to accommodate the growing team's content creation needs. I slimmed out the API and made it more robust, turning it into a proper finite state machine structure, allowing programmers to implement new AI behaviors quickly and easily. Later, I implemented a smart object system, allowing designers to quickly specify which interactions should pets enter and under which conditions while interacting with the objects. </p>
+      
+      <img src="assets/Images/Animal-shelter-screenshot.png"/>
+      
+      <h2>Gameplay Mechanics Implementation</h2>
+      <p>Working from design documentation, I implemented diverse gameplay features:</p>
+      <ul>
+        <li>World interactions and environmental systems</li>
+        <li>UI elements and their functionalities</li>
+        <li>Horse riding mechanics (DLC content)</li>
+        <li>Pet customization systems</li>
+        <li>AI actions and behaviors</li>
+        <li>Animal-to-animal interactions</li>
+      </ul>
+      
+      <img src="assets/Images/Animal-shelter-photos.png"/>
+      
+      <img src="assets/Images/Shelter-interactions.png"/>
+      
+      <h2>Codebase Maintenance & Documentation</h2>
+      <p>From day one, I maintained and improved existing gameplay systems while bug-fixing across multiple interconnected areas. The technical documentation I developed became critical for onboarding new programmers joining the team. This documentation covered system APIs, architectural patterns, proprietary tools, and style guides—directly enabling the team's growth and sustained development.</p>
+      
+      <img src="assets/Images/Shelter-building-system.png"/>
+      
+      <h2>QA & Diagnostics Infrastructure</h2>
+      <p>I contributed to building QA infrastructure including a custom debugging console replacing text-based input (significantly improving non-technical testers' workflows), proprietary logging tools, and integration with Unity's cloud diagnostics for post-release metrics and improvements.</p>
+    `
+  },
+  {
     id: "break-a-bot",
     title: "Break-A-Bot",
     period: "2024 — 2025",
@@ -286,7 +336,7 @@ const PROJECTS = [
       </video>
       
       <h2>Overview</h2>
-      <p>Break-A-Bot is a commercial roguelike developed in Unreal Engine. As AI and gameplay programmer, I focused on creating systems that empowered designers and artists—particularly a complex level generation tool and modular AI framework supporting diverse enemy encounters.</p>
+      <p>Break-A-Bot is a roguelike developed in Unreal Engine as a university project. As AI and gameplay programmer, I focused on creating systems that empowered designers and artists—particularly a complex level generation tool and modular AI framework supporting diverse enemy encounters.</p>
       
       <h2>Procedural Level Generation Architecture</h2>
       <p>I developed an architect-driven procedural level generation tool inspired by Returnal and Path of Exile 2. The system features a modular, pass-based design that enabled extensibility and maintainability:</p>
@@ -383,50 +433,6 @@ const PROJECTS = [
           `
   },
   {
-    id: "animal-shelter-simulator",
-    title: "Animal Shelter Simulator",
-    period: "2022 — 2023",
-    type: "Multi-platform · Commercial",
-    thumb: "assets/thumbnails/AnimalShelter1.jpg",
-    shortDesc: "Commercial simulation game released on PC, Xbox One, PlayStation, Nintendo Switch, and SteamDeck. Rebuilt the AI system with a visual tool for designers, implemented gameplay mechanics, and developed technical documentation.",
-    tags: ["Unity", "C#", "AI Systems", "Multi-platform", "Documentation"],
-    link: { label: "steam", url: "https://store.steampowered.com/app/1239320/Animal_Shelter/" },
-    body: `
-      <iframe width="566" height="313" src="https://www.youtube.com/embed/SloUgzPK1v0" title="Animal Shelter - Official Release Trailer | STEAM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      
-      <h2>Overview</h2>
-      <p>Animal Shelter Simulator is a commercial simulation game released across PC and multiple consoles (Xbox One, PlayStation, Nintendo Switch, SteamDeck). I joined as AI and gameplay programmer, quickly becoming the designated AI specialist while contributing broadly to gameplay systems and team infrastructure.</p>
-      
-      <h2>AI System Refactor</h2>
-      <p>Upon joining, I refactored the core AI system to accommodate the growing team's content creation needs. I slimmed out the API and made it more robust, turning it into a proper finite state machine structure, allowing programmers to implement new AI behaviors quickly and easily. Later, I implemented a smart object system, allowing designers to quickly specify which interactions should pets enter and under which conditions while interacting with the objects. </p>
-      
-      <img src="assets/Images/Animal-shelter-screenshot.png"/>
-      
-      <h2>Gameplay Mechanics Implementation</h2>
-      <p>Working from design documentation, I implemented diverse gameplay features:</p>
-      <ul>
-        <li>World interactions and environmental systems</li>
-        <li>UI elements and their functionalities</li>
-        <li>Horse riding mechanics (DLC content)</li>
-        <li>Pet customization systems</li>
-        <li>AI actions and behaviors</li>
-        <li>Animal-to-animal interactions</li>
-      </ul>
-      
-      <img src="assets/Images/Animal-shelter-photos.png"/>
-      
-      <img src="assets/Images/Shelter-interactions.png"/>
-      
-      <h2>Codebase Maintenance & Documentation</h2>
-      <p>From day one, I maintained and improved existing gameplay systems while bug-fixing across multiple interconnected areas. The technical documentation I developed became critical for onboarding new programmers joining the team. This documentation covered system APIs, architectural patterns, proprietary tools, and style guides—directly enabling the team's growth and sustained development.</p>
-      
-      <img src="assets/Images/Shelter-building-system.png"/>
-      
-      <h2>QA & Diagnostics Infrastructure</h2>
-      <p>I contributed to building QA infrastructure including a custom debugging console replacing text-based input (significantly improving non-technical testers' workflows), proprietary logging tools, and integration with Unity's cloud diagnostics for post-release metrics and improvements.</p>
-    `
-  },
-  {
     id: "holo-knights-td",
     title: "Holo Knights TD",
     period: "2021",
@@ -518,22 +524,28 @@ const PROJECTS = [
 // ─────────────────────────────────────────────────────────────────────────────
 (function injectThumbStyles() {
   const css = `
-    /* ── Desktop layout: index | thumb | body | arrow ── */
-    .project-row {
+    .projects-list {
       display: grid !important;
-      grid-template-columns: 3rem 240px 1fr auto !important;
-      align-items: center !important;
-      gap: 2rem !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.1rem;
+      border-top: none !important;
     }
 
-    /* ── Thumbnail wrapper ── */
-    .row-thumb {
-      width: 240px;
-      height: 240px;
-      aspect-ratio: 1 / 1;
-      flex-shrink: 0;
-      overflow: hidden;
+    .project-row {
+      display: flex !important;
+      flex-direction: column !important;
+      padding: 0 !important;
       border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .row-thumb {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
       position: relative;
       background: #111;
     }
@@ -541,7 +553,7 @@ const PROJECTS = [
     .row-thumb img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       object-position: center;
       display: block;
       transition: transform 0.4s ease;
@@ -552,7 +564,63 @@ const PROJECTS = [
       transform: scale(1.04);
     }
 
-    /* Placeholder */
+    .row-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      padding: 0.9rem 0.95rem 1rem;
+      flex: 1;
+    }
+
+    .row-topline {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 0.85rem;
+    }
+
+    .row-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .row-index {
+      padding-top: 0 !important;
+      min-width: 2rem;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .row-arrow {
+      opacity: 0.7;
+      transform: none;
+      padding-top: 0 !important;
+      flex-shrink: 0;
+    }
+
+    .project-row:hover .row-arrow {
+      opacity: 1;
+      transform: translateX(3px);
+    }
+
+    .row-meta,
+    .row-title {
+      margin-bottom: 0 !important;
+    }
+
+    .row-desc {
+      max-width: none !important;
+      min-height: 4.3rem;
+      margin: 0;
+    }
+
+    .row-tags {
+      margin-top: 0 !important;
+      align-items: flex-start;
+    }
+
     .row-thumb-placeholder {
       width: 100%;
       height: 100%;
@@ -576,13 +644,12 @@ const PROJECTS = [
       color: rgba(255,255,255,0.12);
     }
 
-    /* ── Project Link Badge ── */
     .project-link {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       padding: 0.4rem 0.8rem;
-      margin-top: 0.75rem;
+      margin-top: auto;
       border: 1px solid currentColor;
       border-radius: 2px;
       font-size: 0.8rem;
@@ -592,6 +659,7 @@ const PROJECTS = [
       text-decoration: none;
       transition: all 0.3s ease;
       color: rgba(255,255,255,0.6);
+      align-self: flex-start;
     }
 
     .project-link:hover {
@@ -663,14 +731,12 @@ const PROJECTS = [
       font-size: 1em;
     }
 
-    /* ── Detail Page Link Section ── */
     .page-link {
       margin: 1.5rem 0 2rem 0;
       padding-top: 1.5rem;
       border-top: 1px solid var(--border);
     }
 
-    /* ── Tag color system ── */
     .tag { border: none !important; font-weight: 400 !important; }
 
     .tag[data-cat="engine"]   { background: rgba(120,180,255,0.12); color: #7ab4ff; }
@@ -680,30 +746,48 @@ const PROJECTS = [
     .tag[data-cat="concept"]  { background: rgba(255,130,110,0.10); color: #ff8a72; }
     .tag[data-cat="default"]  { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.5); }
 
-    /* ── Mobile: full-width card layout ── */
+    @media (max-width: 1380px) {
+      .projects-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .projects-list {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
     @media (max-width: 768px) {
+      .projects-list {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+      }
+
       .project-row {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 0 !important;
-        padding: 0 0 1.5rem !important;
+        display: grid !important;
       }
 
       .row-thumb {
         width: 100% !important;
-        height: auto !important;
         aspect-ratio: 1 / 1 !important;
-        border-left: none !important;
-        border-right: none !important;
-        border-top: none !important;
-        margin-bottom: 1rem;
+        margin-bottom: 0;
+        padding: 0.65rem;
       }
 
-      .row-index {
-        padding: 1rem 0 0.25rem !important;
+      .row-content {
+        padding: 1rem;
+      }
+
+      .row-topline {
+        gap: 0.75rem;
       }
 
       .row-arrow { display: none; }
+
+      .row-desc {
+        min-height: 0;
+      }
     }
   `;
   const el = document.createElement('style');
@@ -716,7 +800,21 @@ const PROJECTS = [
 // ─────────────────────────────────────────────────────────────────────────────
 function renderSkills() {
   document.getElementById('skills-grid').innerHTML =
-    SKILLS.map(s => `<div class="skill-row">${s}</div>`).join('');
+    SKILLS.map(skill => `
+      <article class="skill-card" tabindex="0">
+        <div class="skill-card-head">
+          <div>
+            <p class="skill-name">${skill.name}</p>
+            <p class="skill-group">${skill.group}</p>
+          </div>
+          <div class="skill-detail">
+            <span class="skill-exp">${skill.experience}</span>
+            <div class="skill-tooltip" role="tooltip">
+              <p class="skill-tooltip-text">${skill.description}</p>
+            </div>
+          </div>
+        </div>
+      </article>`).join('');
 }
 
 function renderSocials() {
@@ -774,12 +872,29 @@ const TAG_CATEGORIES = {
   "72hr jam": "concept", "live ops": "concept", "performance optimization": "concept"
 };
 
+const TAG_CATEGORY_ORDER = {
+  engine: 0,
+  language: 1,
+  tool: 2,
+  platform: 3,
+  concept: 4,
+  default: 5,
+};
+
 function tagCat(label) {
   return TAG_CATEGORIES[label.toLowerCase()] || "default";
 }
 
 function tagsHTML(tags) {
-  return tags.map(t => `<span class="tag" data-cat="${tagCat(t)}">${t}</span>`).join('');
+  return [...tags]
+    .sort((left, right) => {
+      const leftCategory = tagCat(left);
+      const rightCategory = tagCat(right);
+      const categoryDiff = TAG_CATEGORY_ORDER[leftCategory] - TAG_CATEGORY_ORDER[rightCategory];
+      return categoryDiff !== 0 ? categoryDiff : left.localeCompare(right);
+    })
+    .map(tag => `<span class="tag" data-cat="${tagCat(tag)}">${tag}</span>`)
+    .join('');
 }
 
 function linkHTML(link) {
@@ -801,16 +916,20 @@ function renderProjects() {
       const isClickable = p.id && p.body;
       return `
       <div class="project-row reveal" ${isClickable ? `onclick="showProject('${p.id}')"` : ''}>
-        <span class="row-index">${String(i + 1).padStart(2, '0')}</span>
         ${thumbHTML(p)}
-        <div>
-          <h3 class="row-title">${p.title}</h3>
-          <p class="row-meta">${p.period} · ${p.type}</p>
+        <div class="row-content">
+          <div class="row-topline">
+            <div class="row-copy">
+              <span class="row-index">${String(i + 1).padStart(2, '0')}</span>
+              <h3 class="row-title">${p.title}</h3>
+              <p class="row-meta">${p.period} · ${p.type}</p>
+            </div>
+            ${isClickable ? '<span class="row-arrow">open ↗</span>' : ''}
+          </div>
           <p class="row-desc">${p.shortDesc}</p>
           <div class="row-tags">${tagsHTML(p.tags)}</div>
           ${linkHTML(p.link)}
         </div>
-        ${isClickable ? '<span class="row-arrow">open ↗</span>' : ''}
       </div>`;
     }).join('');
 }
@@ -858,10 +977,28 @@ function showProject(id) {
     </div>`;
   });
 
-  // Remove width and height attributes from videos and iframes to make them responsive
-  bodyWithMedia = bodyWithMedia.replace(/(<(?:video|iframe)[^>]*)\s+width=["']?\d+["']?\s+height=["']?\d+["']?([^>]*>)/g, '$1$2');
-  bodyWithMedia = bodyWithMedia.replace(/(<(?:video|iframe)[^>]*)\s+width=["']?\d+["']?([^>]*>)/g, '$1$2');
-  bodyWithMedia = bodyWithMedia.replace(/(<(?:video|iframe)[^>]*)\s+height=["']?\d+["']?([^>]*>)/g, '$1$2');
+  // Remove fixed media sizing while preserving iframe aspect ratio when it is provided.
+  bodyWithMedia = bodyWithMedia.replace(/<(video|iframe)\b([^>]*)>/g, (match, tagName, rawAttributes) => {
+    const widthMatch = rawAttributes.match(/\swidth=["']?(\d+)["']?/i);
+    const heightMatch = rawAttributes.match(/\sheight=["']?(\d+)["']?/i);
+    let attributes = rawAttributes
+      .replace(/\swidth=["']?\d+["']?/gi, '')
+      .replace(/\sheight=["']?\d+["']?/gi, '');
+
+    if (tagName.toLowerCase() === 'iframe' && widthMatch && heightMatch) {
+      const embedRatio = `${widthMatch[1]} / ${heightMatch[1]}`;
+      if (/\sstyle=(['"])(.*?)\1/i.test(attributes)) {
+        attributes = attributes.replace(/\sstyle=(['"])(.*?)\1/i, (styleMatch, quote, styleValue) => {
+          const suffix = styleValue.trim().endsWith(';') || styleValue.trim() === '' ? '' : ';';
+          return ` style=${quote}${styleValue}${suffix} --embed-ratio: ${embedRatio};${quote}`;
+        });
+      } else {
+        attributes += ` style="--embed-ratio: ${embedRatio};"`;
+      }
+    }
+
+    return `<${tagName}${attributes}>`;
+  });
   
   document.getElementById('project-page-content').innerHTML = `
     <div class="project-page">
@@ -880,7 +1017,6 @@ function showProject(id) {
             <p class="meta-value">${p.type}</p>
           </div>
           <div>
-            <p class="meta-label">Stack</p>
             <div class="meta-tags">${tagsHTML(p.tags)}</div>
           </div>
         </div>
@@ -1045,7 +1181,7 @@ function showCV() {
           <h2>Notable Projects & Contributions</h2>
           <ul class="cv-list">
             <li><strong>Animal Shelter Simulator 2</strong> — Commercial title shipping on PC and SteamDeck; architected networked codebase and implemented complete animal AI and animation systems</li>
-            <li><strong>Break-A-Bot</strong> — Commercial roguelike in Unreal Engine featuring architect-driven procedural generation with rule-based extensibility and modular AI framework</li>
+            <li><strong>Break-A-Bot</strong> — University project- a roguelike game in Unreal Engine featuring architect-driven procedural generation with rule-based extensibility and modular AI framework</li>
             <li><strong>Pepi Engine & Owlet</strong> — Custom C++ game engine with visual AI scripting tools (FSM/BT editors, blackboard system); powered RTS game handling 10,000+ agents</li>
             <li><strong>Animal Shelter Simulator</strong> — Multi-platform commercial title (PC, Xbox One, PlayStation, Switch, SteamDeck); refactored AI system and created visual tools for designers</li>
             <li><strong>Visual Debugging Console</strong> — Open-source QA tool for Unity with runtime variable monitoring and remote function calling; deployed in multiple commercial game studios</li>
