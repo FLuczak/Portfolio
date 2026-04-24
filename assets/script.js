@@ -91,7 +91,7 @@ const PROJECTS = [
       <p>The refactoring included implementing custom struct serialization to provide backwards compatibility with legacy state evaluation approaches, allowing for a smooth migration path without requiring UI-level editor code. This demonstrated how careful architectural decisions can reduce implementation complexity and minimize disruption to designer workflows.</p>
       
       <h2>Hierarchical Task Network (HTN) Extensions</h2>
-      <p>Building on the foundation of the project's HTN system, I implemented new HTN tasks and decorators that interface with the world state system. This involved deep dives into the existing HTN implementation to understand task lifecycle, parameter passing, and plan asset configuration. I extended the system with new primitives that enable designers to construct complex, state-dependent AI behaviors without requiring additional programmer implementation.</p>
+      <p>Building on the foundation of the project's HTN system, I implemented new HTN tasks and decorators that interface with the world state system. This involved deep dives into the existing HTN implementation to understand task lifecycle, parameter passing, and plan asset configuration. I extended the system with new tasks that enable designers to construct complex, state-dependent AI behaviors without requiring additional programmer implementation.</p>
       
       <h2>Character Animation and Control Rigs</h2>
       <p>A substantial learning focus was placed on Unreal's control rig system and its integration with gameplay code. I implemented procedural animation passes for character models, including complex mechanics like dynamic aim systems that respond to player input and environmental factors. This involved:</p>
@@ -180,31 +180,50 @@ const PROJECTS = [
     period: "2024",
     type: "University Project · Custom Engine",
     thumb: "assets/thumbnails/pepi-engine.jpg",
-    shortDesc: "Custom game engine built with a team of 8 over 8 weeks featuring custom rendering, robust level editor, and visual AI scripting. Implemented AI framework with visual scripting, maintained core engine systems, and established CI/CD pipelines.",
+    shortDesc: "Custom C++ game engine built with a team of 8 over 8 weeks. Designed and implemented an AI framework supporting Finite State Machines and Behavior Trees with a type-safe blackboard, a navmesh system built on Constrained Delaunay Triangulation with funnel smoothing, and a full CI/CD pipeline. Powered a shipped RTS game handling up to 10,000 concurrent agents.",
     tags: ["C++", "Engine Development", "AI Framework", "CI/CD", "ECS", "Tools Programming"],
     link: { label: "github", url: "https://github.com/FLuczak/Owlet" },
     body: `
       <h2>Overview</h2>
-      <p>Pepi Engine is a game engine created by 8 programming students in just 8 weeks, designed to make real-time strategy (RTS) game development accessible. The engine featured a custom rendering pipeline, visual level editor, procedural tools, robust entity-component-system (ECS) architecture, advanced navigation systems, and comprehensive serialization.</p>
-      
+      <p>Pepi Engine is a custom C++ game engine built by 8 programmers over 8 weeks, designed from the ground up for real-time strategy game development. It ships a custom rendering pipeline, a visual level editor with scene hierarchy, an entity-component-system architecture built on entt, and a comprehensive cereal-based serialization layer. My primary contributions were the AI behavior framework, the navigation system, and CI/CD infrastructure for the whole team.</p>
+
       <video controls width="566" height="313">
         <source src="assets/Videos/In editor work.mp4" type="video/mp4">
-        </video>
-      <h2>AI Visual Scripting Framework</h2>
-      <p>I designed and implemented the core AI framework that allowed designers to define behaviors through both Finite State Machines (FSMs) and Behavior Trees (BTs) without writing code. Key features included:</p>
+      </video>
+
+      <h2>AI Behavior Framework</h2>
+      <p>The AI framework supports two complementary behavior paradigms that run simultaneously on the same agent and share a common blackboard: Finite State Machines for structured, transition-driven logic and Behavior Trees for hierarchical, goal-driven decision-making. This dual-paradigm design lets designers and programmers choose the right abstraction per behavior without duplicating infrastructure. The system runs on a fixed timestep of 0.1 seconds, decoupled from the render loop, keeping AI update costs predictable and eliminating jitter from frame rate variance.</p>
+
+      <h3>Behavior Trees</h3>
+      <p>The BT implementation covers the full production node set:</p>
       <ul>
-        <li><strong>Programmatic behavior definition</strong> with exposed parameters for dynamic prototyping and rapid iteration by designers</li>
-        <li><strong>Blackboard system</strong> storing all data types available to AI, with debug functionality to preview values in real-time</li>
-        <li><strong>Visual editors</strong> for both FSMs and BTs allowing intuitive logical flow definition with serialization support</li>
-        <li><strong>Visual debugging</strong> indicating current states and behavior status during gameplay</li>
+        <li><strong>Composite nodes</strong>: Sequence runs children until one fails; Selector runs children until one succeeds</li>
+        <li><strong>Decorator nodes</strong>: Inverter, Repeater, AlwaysSucceed, UntilFail, and a generic Comparison&lt;T&gt; for blackboard-driven conditions with compile-time type checking</li>
+        <li><strong>Leaf nodes</strong>: Abstract BehaviorTreeAction base class extended per behavior, receiving a context with delta time, blackboard reference, and per-node status tracking</li>
+        <li><strong>Status propagation</strong>: INVALID, SUCCESS, RUNNING, FAILURE, and ABORTED states flow correctly through the tree hierarchy on every tick</li>
+        <li><strong>Serialization</strong>: Full JSON round-trip persistence via nlohmann/json, enabling the visual editor to save and reload behavior definitions</li>
       </ul>
-      
-            <video controls width="566" height="313">
-        <source src="assets/Videos/Animation editor.mp4" type="video/mp4">
-        </video>
-      
-      <p>This framework became the backbone for all gameplay functionality in Owlet (see separate project), proving robust enough to even implement animation systems using only state machines.</p>
-      
+
+      <h3>Finite State Machines</h3>
+      <p>The FSM implementation goes significantly beyond a basic state switch. Transitions are evaluated through a type-safe comparator system supporting six operators (==, !=, &lt;, &lt;=, &gt;, &gt;=) with compile-time operator verification via SFINAE — invalid comparisons are caught before the program runs. States register editor-exposed parameters through a macro-based field system, letting designers tune values without touching code. Runtime type queries via GetStateIDsOfType&lt;T&gt;() support dynamic state lookups across active machines, enabling complex inter-agent logic without tight coupling.</p>
+
+      <h3>Blackboard</h3>
+      <p>All AI data exchange flows through a template-based blackboard with compile-time type safety and zero runtime overhead. SetData&lt;T&gt;() and GetData&lt;T&gt;() enforce correct types at the call site, while TryGet&lt;T&gt;() returns a nullable pointer for safe conditional reads without exceptions. The blackboard handles primitives, enums, containers, pointers, and custom structs. A built-in PreviewToString() method surfaces live values in the ImGui editor overlay, making the full blackboard state instantly inspectable during play without stopping execution.</p>
+
+      <div class="repo-card">
+        <div class="repo-card-header">
+          <h3>⚙️ Behavior Selection Structures</h3>
+          <a href="https://github.com/FLuczak/FLuczakBehaviorSelectionStructures" target="_blank" rel="noopener" class="repo-card-link">View on GitHub ↗</a>
+        </div>
+        <p class="repo-card-desc">A slightly adjusted and stripped standalone version of the AI behavior framework. Implements Behavior Trees and Finite State Machines with a shared type-safe blackboard, JSON round-trip serialization, factory-pattern runtime instantiation by name, and ImGui-integrated live debugging.</p>
+        <div class="repo-card-tags">
+          <span class="repo-tag">C++</span>
+          <span class="repo-tag">Behavior Trees</span>
+          <span class="repo-tag">Finite State Machines</span>
+          <span class="repo-tag">Game AI</span>
+        </div>
+      </div>
+
       <table style="width: 100%; border-collapse: collapse; margin: 2rem 0;">
         <tr>
           <td style="width: 50%; padding: 0 1rem 0 0;">
@@ -218,22 +237,49 @@ const PROJECTS = [
         </tr>
       </table>
 
-      <h2>Core Engine Systems</h2>
-      <p>Beyond the AI framework, I maintained and enhanced critical engine features:</p>
-      <ul>
-        <li>Added multicast delegates for event-driven gameplay</li>
-        <li>Modified the ECS framework (entt) to handle messages and events for parallel computation</li>
-        <li>Contributed to the serialization system (utilizing cereal library) for robust serialization of entities, components, levels, and AI structures</li>
-        <li>Created gameplay tools including area tagging for scripted zones, performant physics using BVH optimization, and a customizable order system for RTS mechanics</li>
-      </ul>
-      
-      <h2>Navigation & Locomotion</h2>
-      <p>I implemented a navigation system supporting performant parallelized pathfinding on both grids and nav meshes for up to 5,000 agents. The system featured path smoothing and funnel algorithm tracing. The grid-based approach used for Owlet could seamlessly switch to nav mesh with minimal adjustments.</p>
-      
+      <p>The framework proved robust enough to drive animation state machines as well as gameplay logic in Owlet, with designers using the visual editors to wire up behavior without writing code.</p>
+
+      <video controls width="566" height="313">
+        <source src="assets/Videos/Animation editor.mp4" type="video/mp4">
+      </video>
+
+      <h2>Navigation System</h2>
+      <p>The navigation system exposes a unified agent interface over two interchangeable backends. Game code accesses navigation through GridAgent structs containing radius, speed, height, goal position, and preferred velocity. Switching from grid to navmesh requires no changes to gameplay code, making the approach future-proof as level complexity grows.</p>
+
+      <h3>Grid Pathfinding</h3>
+      <p>The grid backend runs A* on a tile graph with selectable heuristics: Euclidean, Manhattan, or straight-line. Local separation avoidance activates within five agent radii, preventing clumping without requiring global collision resolution. Path recomputation is lazy and triggers only on goal changes, keeping per-frame overhead minimal. The grid backend was the primary system used in Owlet, where it sustained up to 10,000 simultaneous agents within frame budget.</p>
+
+      <h3>Navmesh Pathfinding</h3>
+      <p>The navmesh backend generates a triangle mesh from raw obstacle and floor polygons using Constrained Delaunay Triangulation (CDT). Obstacles are automatically inflated by agent radius before triangulation, guaranteeing collision-free corridors without manual authoring. A* runs on the resulting polygon-to-polygon adjacency graph, and a funnel algorithm (string pulling) then converts the raw waypoint sequence into smooth, direct routes. Navigation paths support continuous interpolation via FindPointOnPath(t), nearest-point queries, and offset-based sampling for multi-agent lane separation.</p>
+
+      <div class="repo-card">
+        <div class="repo-card-header">
+          <h3>🧭 Navigation Library</h3>
+          <a href="https://github.com/FLuczak/FluczakNavigation" target="_blank" rel="noopener" class="repo-card-link">View on GitHub ↗</a>
+        </div>
+        <p class="repo-card-desc">A slightly adjusted and stripped standalone C++ navigation library. Features Constrained Delaunay Triangulation mesh generation from obstacle polygons, A* pathfinding on the resulting graph, funnel algorithm path smoothing, agent radius inflation for collision-free corridors, and position sampling utilities.</p>
+        <div class="repo-card-tags">
+          <span class="repo-tag">C++</span>
+          <span class="repo-tag">Pathfinding</span>
+          <span class="repo-tag">Navmesh</span>
+          <span class="repo-tag">CDT</span>
+          <span class="repo-tag">A*</span>
+        </div>
+      </div>
+
       <img src="assets/Images/Grid.png"/>
-      
+
+      <h2>Core Engine Systems</h2>
+      <p>Beyond the AI framework, I maintained and extended critical engine infrastructure:</p>
+      <ul>
+        <li>Added multicast delegates for event-driven gameplay, later extracted as the FLUCZAK Event Utility Library</li>
+        <li>Modified the entt ECS framework to route messages and events for parallel computation across systems</li>
+        <li>Contributed to the cereal-based serialization system covering entities, components, levels, and all AI structures</li>
+        <li>Built gameplay tools including area tagging for scripted zones, BVH-accelerated physics queries, and a configurable order system for RTS command logic</li>
+      </ul>
+
       <h2>CI/CD Pipeline</h2>
-      <p>Single-handedly, I established a comprehensive QA pipeline using GitHub Actions including build checks across platforms, unit test integration, automatic formatting and linting, and automated build artifact generation for itch.io deployment with Discord notifications for team coordination.</p>
+      <p>I established a full automated QA pipeline using GitHub Actions covering multi-platform build verification, unit test integration, automatic Clang formatting and linting, and artifact generation with automated itch.io deployment and Discord notifications on every merge to keep the whole team informed.</p>
     `
   },
   {
@@ -242,39 +288,81 @@ const PROJECTS = [
     period: "2024",
     type: "University Project · RTS Game",
     thumb: "assets/thumbnails/owlet.jpg",
-    shortDesc: "Real-time strategy game built in Pepi Engine. Architected the AI framework that powered all unit behaviors, implemented core gameplay systems, and led the programming team through delivery.",
+    shortDesc: "Real-time strategy game built in a custom C++ engine over 8 weeks by a team of 13. As tech lead and sole AI programmer, designed and shipped an AI framework sustaining up to 10,000 concurrent agents on a fixed-timestep parallel execution loop. Implemented all unit and enemy behaviors, resource and combat systems, and coordinated delivery across all programming disciplines.",
     tags: ["C++", "Pepi Engine", "AI Framework", "Gameplay Systems", "Tech team lead"],
     link: { label: "github", url: "https://github.com/FLuczak/Owlet" },
     body: `
       <iframe width="566" height="313" src="https://www.youtube.com/embed/dGsASNUbWmw" title="Owlet Trailer | Team Tiny Pepi | Pepi Engine" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      
+
       <h2>Overview</h2>
-      <p>Owlet is a real-time strategy game developed using the Pepi Engine over 8 weeks. My role encompassed AI framework creation and maintenance, core gameplay programming, and programming team leadership—managing task distribution and ensuring technical milestones were met.</p>
-      
-      <h2>AI Framework & Visual Scripting</h2>
-      <p>The entire gameplay of Owlet—from unit behaviors to enemy AI—was built exclusively on the AI framework I created. The system had to be both robust and highly optimized. All behaviors ran in parallel, communicating through blackboards and gameplay events invoked after the AI update loop. This integration with the engine's ECS architecture allowed us to handle up to <strong>10,000 agents</strong> efficiently.</p>
-            
+      <p>Owlet is a real-time strategy game developed in Pepi Engine over 8 weeks by a team of 13, including 9 programmers. As tech lead and the sole AI programmer, I owned the complete AI behavior framework, all unit and enemy behaviors, core gameplay systems, and programming team coordination. The central technical challenge was building an AI architecture that could sustain RTS-scale agent counts in real time while staying designer-friendly enough for rapid iteration without programmer involvement.</p>
+
+      <h2>AI at Scale: 10,000 Concurrent Agents</h2>
+      <p>The entire gameplay of Owlet runs on the AI behavior framework built in Pepi Engine. Every unit and enemy is driven by a combination of Finite State Machines and Behavior Trees sharing a single type-safe blackboard. The architecture was designed specifically for the demands of an RTS, where agent counts can reach the thousands during wave-based combat.</p>
+
+      <p>The AI system runs on a fixed timestep of 0.1 seconds, fully decoupled from the render loop. This keeps update costs predictable and eliminates jitter caused by frame rate variance. All agents execute in parallel within the ECS update loop. Once the AI pass completes, results synchronize through events and blackboard writes, ensuring no mid-frame data races. The tested upper bound for simultaneous agents was <strong>10,000</strong> without dropping below target frame rate.</p>
+
+      <p>State transitions use the comparator system to evaluate conditions such as attack range, cooldown status, and threat proximity without branching code. Blackboard writes from gameplay events feed directly into transition evaluations, so AI state reacts to game changes within the same fixed-timestep frame they occur.</p>
+
       <img src="assets/Images/Owlet-tons-of-agents.png"/>
-      
-      <h2>Gameplay & Design Implementation</h2>
-      <p>I worked directly with the design team to implement diverse gameplay elements including:</p>
+
+      <h2>Unit and Enemy Behaviors</h2>
+      <p>All unit and enemy AI was implemented as custom states and actions within the framework. Notable implementations include:</p>
       <ul>
-        <li>All AI state behavior logic and decision-making for units</li>
-        <li>Gameplay stat system with modifiers and buffs</li>
-        <li>Wave generation system with in-editor configuration for enemy spawning</li>
-        <li>Resource gathering and management systems</li>
-        <li>Player command and unit order system</li>
+        <li><strong>RangedAttackState</strong>: Validates targets against blackboard data, manages attack cooldowns, spawns projectiles with visual and audio effects, and continuously recomputes navigation goals to maintain optimal range during active combat</li>
+        <li><strong>AttackOrderEnemyAI</strong>: Assesses threats by finding the closest player unit or building, sets navigation goals dynamically, and triggers attack states when range conditions are satisfied</li>
+        <li><strong>Idle and patrol states</strong>: Handle default behavior and movement between orders, with action index tracking to stagger AI decisions across frames and prevent synchronized update spikes</li>
+        <li><strong>Animation synchronization</strong>: Blackboard values drive animation parameters directly, keeping visual state consistent with AI state with no extra coupling code between systems</li>
       </ul>
-      
-      <img src= "assets/Images/Owlet-combat.gif"/>
-      
+
+      <div class="repo-card">
+        <div class="repo-card-header">
+          <h3>⚙️ Behavior Selection Structures</h3>
+          <a href="https://github.com/FLuczak/FLuczakBehaviorSelectionStructures" target="_blank" rel="noopener" class="repo-card-link">View on GitHub ↗</a>
+        </div>
+        <p class="repo-card-desc">A slightly adjusted and stripped standalone version of the AI behavior framework used in Owlet. Implements Behavior Trees and Finite State Machines with a shared type-safe blackboard, JSON round-trip serialization, factory-pattern instantiation by name, and ImGui-integrated live debugging.</p>
+        <div class="repo-card-tags">
+          <span class="repo-tag">C++</span>
+          <span class="repo-tag">Behavior Trees</span>
+          <span class="repo-tag">Finite State Machines</span>
+          <span class="repo-tag">Game AI</span>
+        </div>
+      </div>
+
+      <div class="repo-card">
+        <div class="repo-card-header">
+          <h3>🧭 Navigation Library</h3>
+          <a href="https://github.com/FLuczak/FluczakNavigation" target="_blank" rel="noopener" class="repo-card-link">View on GitHub ↗</a>
+        </div>
+        <p class="repo-card-desc">A slightly adjusted and stripped standalone version of the navigation system used in Owlet. Features Constrained Delaunay Triangulation navmesh generation, A* pathfinding, funnel algorithm path smoothing, and agent radius inflation for collision-free corridors.</p>
+        <div class="repo-card-tags">
+          <span class="repo-tag">C++</span>
+          <span class="repo-tag">Pathfinding</span>
+          <span class="repo-tag">Navmesh</span>
+          <span class="repo-tag">CDT</span>
+          <span class="repo-tag">A*</span>
+        </div>
+      </div>
+
+      <h2>Gameplay Systems</h2>
+      <p>Working directly with the design team, I implemented the full gameplay feature set:</p>
+      <ul>
+        <li>All AI state behavior logic and decision-making for player units and enemy waves</li>
+        <li>Gameplay stat system with modifiers, buffs, and debuffs driving combat balance</li>
+        <li>Wave generation system with in-editor configuration for enemy type, count, and spawn timing</li>
+        <li>Resource gathering and management feeding the construction and upgrade economy</li>
+        <li>Player command and unit order system translating input into distributed AI goals across hundreds of agents</li>
+      </ul>
+
+      <img src="assets/Images/Owlet-combat.gif"/>
+
       <h2>Core Engine Maintenance</h2>
-      <p>I maintained multiple critical engine systems including serialization, ECS, level editor, unit creator, and animation editor to ensure stable tool support for the team's workflow.</p>
-      
+      <p>I kept critical engine systems stable throughout production: serialization, ECS, level editor, unit creator, and animation editor. This ensured the rest of the team always had reliable tool support without having to pause feature work for infrastructure issues.</p>
+
       <img src="assets/Images/Owlet-in-engine.png"/>
 
-      <h2>CI/CD & Team Leadership</h2>
-      <p>I established and maintained our GitHub Actions CI/CD pipeline featuring unit test integration, compilation checks, Clang Tidy analysis, automatic itch.io deployment post-merge, and automatic code formatting. As team lead, I assigned tasks, communicated with the producer and other discipline leads, managed deliverables, and ensured all requirements were feasible within sprint deadlines.</p>
+      <h2>CI/CD and Team Leadership</h2>
+      <p>I set up and maintained the GitHub Actions pipeline with unit test integration, build verification, Clang Tidy analysis, automatic itch.io deployment on merge, and automatic code formatting. As programming lead, I assigned tasks, coordinated with the producer and other discipline leads, and confirmed every sprint's deliverables were technically feasible before commitment.</p>
     `
   },
   {
