@@ -1273,7 +1273,7 @@ function showCV() {
 
           <div class="cv-project">
             <h3>Animal Shelter Simulator 2 <span class="cv-subtitle-small">— PC / SteamDeck · Commercial · Dream Parable · 2024–2025</span></h3>
-            <p>Sole AI programmer and co-architect on a commercial simulation title. Designed and implemented all animal AI: custom navigation atop Recast/A* with physics-based flocking, whisker avoidance, and leash-following locomotion; a utility AI framework with custom considerations and tasks; 40+ behavior-driven interaction animations with procedural IK layering. Engineered multiplayer synchronization across AI, economy, and item interaction systems. Sustained 20+ agents in dense scenes via per-agent LODs, area throttling, and cluster-based path optimization.</p>
+            <p>One of two AI programmers and co-architect on a commercial simulation title. Designed and implemented all animal AI: custom navigation atop Recast/A* with physics-based flocking, whisker avoidance, and leash-following locomotion; a utility AI framework with custom considerations and tasks; 40+ behavior-driven interaction animations with procedural IK layering. Engineered multiplayer synchronization across AI, economy, and item interaction systems. Sustained 20+ agents in dense scenes via per-agent LODs, area throttling, and cluster-based path optimization.</p>
           </div>
 
           <div class="cv-project">
