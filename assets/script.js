@@ -113,9 +113,7 @@ const PROJECTS = [
         <li>Flanking and tactical positioning behaviors</li>
         <li>Integrating existing AI token distribution systems for managing action scheduling across multiple agents</li>
       </ul>
-      
-      <p>This work required understanding AI token systems for distributing limited computational resources across many agents, ensuring responsive AI even under performance constraints.</p>
-      
+            
       <h2>VR Gameplay Mechanics</h2>
       <p>Early project work focused on refining interactive gameplay mechanics for VR, including hand snapping systems that respond to object geometry, haptic feedback integration, and the underlying gameplay code that drives player interaction. This required understanding physics queries, collision detection, and responsive feedback systems critical to VR user experience.</p>
       
