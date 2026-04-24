@@ -139,15 +139,18 @@ const PROJECTS = [
       <h2>Overview</h2>
       <p>Animal Shelter Simulator 2 is a commercial simulation game released on PC and SteamDeck. I joined as a generalist programmer, taking a central role in architecture design and the implementation of all animal AI systems that power the core gameplay, as well as implementing gameplay systems and tools facilitating workflows of other developers.</p>
       
-      <h2>Architecture & AI Systems</h2>
+      <h2>Architecture design</h2>
       <p>In the pre-production phase, I worked closely with the programming team to design the architectural foundation of the game, establishing system dependencies, API endpoints, and feature interactions using UML diagrams. This planning proved invaluable for scaling the codebase as the team grew.</p>
       
-      <p>One of my primary responsibilities was implementing custom navigation and locomotion systems. I developed wrapper solutions over existing nav mesh implementations (Recast and A*) with custom components tailored to gameplay. The real challenge lay in creating locomotion beyond simple A-to-B pathfinding—animals needed to move naturally, responding to game events like interacting with objects. I built physics-based local avoidance, flocking behaviors for multiple NPCs, and custom logic for pets walking on leashes alongside handlers. Managing multiple large navigation graphs with dynamic obstacles and priority-based rebaking required careful optimization.</p>
+      <h2>AI Systems</h2>
+
+      <p>One of my primary responsibilities was implementing custom navigation and locomotion systems. I developed highly proprietary logic for pathfinding and traversal over existing nav mesh implementations (Recast and A*) with custom components tailored to gameplay. The real challenge lay in creating locomotion beyond simple A-to-B pathfinding—animals needed to move naturally, responding to game events like interacting with objects. I built physics-based local avoidance, flocking behaviors for multiple NPCs, whisker-based obstacle detection and avoidance, as well as custom logic for pets walking on leashes alongside handlers. Managing multiple large navigation graphs with dynamic obstacles and priority-based rebaking required careful optimization. For this I worked on several optimization techniques: agent area throttling, clustering, agent LODs, path prebaking</p>
       
       <img src="assets/Images/Shelter-open-day.png"/>
 
       <p> During the key moments of the game (such as shelter open day) there could be up to 20 agents in the same space, this introduced a challenge of creating flocking behaviors, so that the NPCs could properly react to other agents and pets in their vicinity </p>
       
+      <p> In the project I also contributed to the development of the game's core behavior system - utility AI. My main contributions involved creating new considerations, tasks and integrations of the gameplay logic to the behaviors and working on multiplayer synchronization of the AI code.</p>
       <h2>Gameplay & Multiplayer Architecture</h2>
       <p>I collaborated closely with the design team to implement gameplay features while exposing values and creating mini-tools to support their work. Key systems included the shelter customization system with upgrades, in-game economy simulation, interactions with dozens of interactable items, and UI screen logic.</p>
       
@@ -1145,9 +1148,11 @@ function showCV() {
             </div>
             <p class="cv-company">Vertigo Games</p>
             <ul class="cv-responsibilities">
-              <li>Implementing and optimizing gameplay functionality for a virtual reality game project</li>
-              <li>Creating technical design documents for new gameplay features</li>
-              <li>Writing automated tests to validate game feature implementations</li>
+              <li>Refactored and extended a world state management system with a universal query evaluator and custom serialization for backwards-compatible migration without disrupting designer workflows</li>
+              <li>Implemented new HTN tasks and decorators integrating with the world state system, enabling designers to author complex state-dependent AI behaviors via data assets without programmer involvement</li>
+              <li>Built procedural character animation using Unreal control rigs: inverse kinematics systems, dynamic aim point calculation, and integration with damage and hit-detection systems</li>
+              <li>Designed AI combat behaviors including defensive position protection, environment-aware navigation with slot reservation, flanking logic, and AI token-based action scheduling across multiple agents</li>
+              <li>Profiled and optimized performance-critical AI and navigation paths for VR latency constraints</li>
             </ul>
           </div>
 
@@ -1159,7 +1164,7 @@ function showCV() {
             <p class="cv-company">Dream Parable</p>
             <ul class="cv-responsibilities">
               <li>Architected the core game codebase during pre-production, establishing system dependencies, API contracts, and design patterns to support rapid team scaling</li>
-              <li>Implemented comprehensive AI systems for animal characters including navigation with custom pathfinding wrappers, natural locomotion, behavior trees, and complex interactions</li>
+              <li>Designed and implemented all animal AI systems: custom navigation and locomotion atop Recast/A* navmesh, physics-based flocking and local avoidance, a utility AI framework with custom considerations and tasks, whisker obstacle detection, and leash-following logic for pets walking alongside handlers</li>
               <li>Developed animation systems leveraging behavior-driven parameters, animation layering, blending, and procedural IK for responsive character animation</li>
               <li>Created specialized tools and mini-editors for the level design, QA, and systems design teams to accelerate iteration workflows</li>
               <li>Engineered multiplayer synchronization systems with client/server authority management, state replication, and conflict resolution for interconnected game systems</li>
@@ -1264,15 +1269,37 @@ function showCV() {
         </section>
 
         <section class="cv-section">
-          <h2>Notable Projects & Contributions</h2>
-          <ul class="cv-list">
-            <li><strong>Animal Shelter Simulator 2</strong> — Commercial title shipping on PC and SteamDeck; architected networked codebase and implemented complete animal AI and animation systems</li>
-            <li><strong>Break-A-Bot</strong> — University project- a roguelike game in Unreal Engine featuring architect-driven procedural generation with rule-based extensibility and modular AI framework</li>
-            <li><strong>Pepi Engine & Owlet</strong> — Custom C++ game engine with visual AI scripting tools (FSM/BT editors, blackboard system); powered RTS game handling 10,000+ agents</li>
-            <li><strong>Animal Shelter Simulator</strong> — Multi-platform commercial title (PC, Xbox One, PlayStation, Switch, SteamDeck); refactored AI system and created visual tools for designers</li>
-            <li><strong>Visual Debugging Console</strong> — Open-source QA tool for Unity with runtime variable monitoring and remote function calling; deployed in multiple commercial game studios</li>
-            <li><strong>FLUCZAK Event Utility Libraries</strong> — Reusable C++ library implementing multicast delegates and event systems for custom game engines</li>
-          </ul>
+          <h2>Notable Projects</h2>
+
+          <div class="cv-project">
+            <h3>Animal Shelter Simulator 2 <span class="cv-subtitle-small">— PC / SteamDeck · Commercial · Dream Parable · 2024–2025</span></h3>
+            <p>Sole AI programmer and co-architect on a commercial simulation title. Designed and implemented all animal AI: custom navigation atop Recast/A* with physics-based flocking, whisker avoidance, and leash-following locomotion; a utility AI framework with custom considerations and tasks; 40+ behavior-driven interaction animations with procedural IK layering. Engineered multiplayer synchronization across AI, economy, and item interaction systems. Sustained 20+ agents in dense scenes via per-agent LODs, area throttling, and cluster-based path optimization.</p>
+          </div>
+
+          <div class="cv-project">
+            <h3>Pepi Engine &amp; Owlet <span class="cv-subtitle-small">— Custom C++ Engine · University · 2024</span></h3>
+            <p>Built a custom C++ game engine in 8 weeks (team of 8). Designed the AI framework with Behavior Trees and Finite State Machines sharing a type-safe blackboard with JSON round-trip serialization and ImGui live debugging. Built navmesh generation via Constrained Delaunay Triangulation with funnel smoothing. As tech lead on Owlet, drove the AI system to sustain <strong>10,000 concurrent agents</strong> on a fixed-timestep parallel update loop. Established the full CI/CD pipeline with multi-platform build verification, Clang formatting, and automated itch.io deployment.</p>
+          </div>
+
+          <div class="cv-project">
+            <h3>Break-A-Bot <span class="cv-subtitle-small">— Unreal Engine 5 · University · 2024–2025</span></h3>
+            <p>AI and gameplay programmer on a roguelike shipping on Steam. Architected a pass-based procedural level generation system with Blueprint-scripted rule objects for room stitching — fully usable by designers without code. Implemented enemy AI using Unreal Behavior Trees with custom tasks, decorators, and dynamic subtree replacement for standard enemies, elite variants, and boss encounters.</p>
+          </div>
+
+          <div class="cv-project">
+            <h3>Animal Shelter Simulator <span class="cv-subtitle-small">— PC / Xbox One / PlayStation / Nintendo Switch / SteamDeck · Commercial · Dream Parable · 2022–2023</span></h3>
+            <p>Refactored the core AI system into a robust FSM architecture and built a visual smart object tool enabling designers to define pet interactions and conditions without writing code. Implemented gameplay features including horse riding DLC mechanics, pet customisation, and animal-to-animal interactions. Shipped across five platforms.</p>
+          </div>
+
+          <div class="cv-project">
+            <h3>Visual Debugging Console for Unity <span class="cv-subtitle-small">— Open Source · 2022</span></h3>
+            <p>Custom QA tool replacing Unity's text console with a user-friendly GUI featuring runtime variable monitoring, remote function invocation, and 3D worldspace labels. Adopted by multiple commercial game studios to accelerate non-technical tester workflows.</p>
+          </div>
+
+          <div class="cv-project">
+            <h3>FLUCZAK Event Utility Libraries <span class="cv-subtitle-small">— Open Source C++ · 2024</span></h3>
+            <p>Reusable C++ multicast delegate and signal bus library used across custom engine and university projects. Designed for zero-overhead type-safe event dispatch in game engine contexts.</p>
+          </div>
         </section>
       </div>
     </div>`;

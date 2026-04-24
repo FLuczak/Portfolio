@@ -896,10 +896,12 @@
     }
 
     .cv-subtitle-small {
-      font-size: 0.75rem;
+      display: block;
+      font-size: 0.72rem;
       color: var(--dim);
       font-weight: 300;
       letter-spacing: 0.05em;
+      margin-top: 0.15rem;
     }
 
     .cv-contact {
@@ -1009,26 +1011,30 @@
     }
 
     .cv-project {
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 1rem;
+      padding: 1.1rem 1.25rem;
+      border: 1px solid var(--border);
+      border-left: 2px solid rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.02);
+      transition: border-left-color 0.18s ease, background 0.18s ease;
     }
 
-    .cv-project:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
+    .cv-project:hover {
+      border-left-color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.035);
     }
 
     .cv-project h3 {
-      font-size: 0.95rem;
+      font-size: 0.93rem;
       font-weight: 400;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
     }
 
     .cv-project p {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.85);
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.78);
     }
 
     .cv-skills-grid {
